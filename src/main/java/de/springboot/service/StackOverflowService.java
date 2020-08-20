@@ -1,13 +1,19 @@
 package de.springboot.service;
 
 import de.springboot.model.StackoverflowWebsite;
+import de.springboot.persistence.StackoverflowWebsiteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StackOverflowService {
+    @Autowired
+    private StackoverflowWebsiteRepository repository;
+
     private static List<StackoverflowWebsite> items = new ArrayList<>();
     static {
         items.add(new StackoverflowWebsite("stackoverflow", "http://stackoverflow.com",
@@ -32,6 +38,15 @@ public class StackOverflowService {
                 "http://cdn.sstatic.net/Sites/ru/img/favicon.ico", "Stack Overflow на русском (StackExchange)",
                 "для программистов"));
     }
+
+//    @PostConstruct
+//    public void init() {
+//        repository.saveAll(items);
+//    }
+
+//    public List<StackoverflowWebsite> findAll() {
+//        return repository.findAll();
+//    }
 
     public List<StackoverflowWebsite> findAll() {
         return items;
